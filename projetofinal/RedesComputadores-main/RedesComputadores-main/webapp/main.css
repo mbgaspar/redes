@@ -1,0 +1,183 @@
+/* Add styles to the form container */
+#loginForm {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    display: inline-block;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+/* Full-width input fields */
+#loginForm input[type=text],
+#loginForm input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+#loginForm input[type=text]:focus,
+#loginForm input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+#loginForm button {
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    background-color: green;
+}
+
+#loginForm button.loading {
+    background: linear-gradient(to right, green 40%, rgb(25, 206, 64), green 60%);
+    background-size: 200%;
+    animation: gradient 2s ease infinite;
+}
+
+#loginForm output {
+    color: red;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 150%
+    }
+
+    100% {
+        background-position: -50%
+    }
+}
+
+/* Add some hover effects to buttons */
+#loginForm button:hover {
+    opacity: 1;
+}
+
+#loginPopup {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lampada {
+    padding-top: 20px;
+}
+
+main {
+    display: grid;
+    grid-template: 1 / 1;
+    place-items: center;
+}
+
+main section {
+    background-color: rgba(0, 0, 0, 0.80);
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    margin: auto auto;
+    width: 100%;
+    height: 100%;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "roboto", sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Style the header */
+header {
+    background-color: #f7f7f7;
+    padding: 5px;
+    text-align: center;
+    font-size: 28px;
+    color: #0f5f5c;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+    flex: 2;
+    font-size: 16px;
+    color: #0f5f5c;
+    /* only for demonstration, should be removed */
+    background: #EEF1EE;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style the list inside the menu */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+article {
+    padding: 5px;
+    flex: 5;
+    background-color: #f7f7f7;
+    /* only for demonstration, should be removed */
+}
+
+/* Style the footer */
+footer {
+    background-color: #f7f7f7;
+    padding: 10px;
+    text-align: center;
+    color: #0f5f5c;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    flex: 10;
+}
+
+body {
+    font-family: monospace;
+}
+
+table {
+    empty-cells: show;
+}
+
+.umi {
+    background-color: #e98d8d;
+}
+
+.temp {
+    background-color: #709ee4;
+}
+
+.alt {
+    background-color: #fefbd8;
+}
+
+.lumi {
+    background-color: rgb(118, 202, 118);
+}
+
+.umi:before,
+.set_off:before {
+    content: "";
+}
+
+.temp:before {
+    content: "";
+}

@@ -1,0 +1,38 @@
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'RedesSamir'. (_ssl.c:1131)
+
+The message you are receiving indicates that the broker's server certificate is not trusted (because it is self-signed), therefore paho is not being correctly told it is trustworthy.
+
+It is possible your fake certificate authority's root certificate (the ca.crt file you feed to paho) is not properly signed or generated, or the certificates that Mosquitto is using are not signed correctly. Either way, you likely need to start the entire process over to be 100% certain everything was done right.
+
+    Generate the fake certificate authority's (CA) signing key
+    $ openssl genrsa -des3 -out ca.key 2048
+
+    Generate a certificate signing request for the fake CA
+    $ openssl req -new -key ca.key -out ca-cert-request.csr -sha256
+        Give the organization a name like "Fake Authority" and do not enter a common name (since your fake CA does not actually live on a server with a name)
+
+    Create the fake CA's root certificate
+    $ openssl x509 -req -in ca-cert-request.csr -signkey ca.key -out ca-root-cert.crt -days 365 -sha256
+
+    Create the server / mqtt broker's keypair
+    $ openssl genrsa -out server.key 2048
+
+    Create a certificate signing request using the server key to send to the fake CA for identity verification
+    $ openssl req -new -key server.key -out server-cert-request.csr -sha256
+        Give the organization a name like "Localhost MQTT Broker Inc." and the common name should be localhost or the exact domain you use to connect to the mqtt broker
+
+    Now acting as the fake CA, you receive the server's request for your signature. You have verified the server is who it says it is (an MQTT broker operating on localhost), so create a new certificate & sign it with all the power of your fake authority.
+    $ openssl x509 -req -in server-cert-request.csr -CA ca-root-cert.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360
+
+Now you have everything you need. Make sure Mosquitto is loading the following in mosquitto.conf:
+
+listener 8883
+cafile certs\ca-root-cert.crt
+keyfile certs\server.key
+certfile certs\server.crt
+
+Make sure paho-mqtt is loading the fake CA's root certificate.
+
+client1.tls_set(ca_certs="ca-root-cert.crt")
+
+This is how it knows that mosquitto's server.crt is legitimately signed by a "real and trusted authority" and is not "self-signed" and thus untrusted. Mosquitto and paho should now be able to securely connect and communicate.

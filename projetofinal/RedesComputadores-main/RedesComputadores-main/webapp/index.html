@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DAELN - Projeto Final</title>
+  <link rel="icon" href="https://i.ibb.co/MkH52w6/Logo-IFSC.png" type="image/icon type">
+  <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+  <script src="webio_mqtt.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <img src="imgheader.png">
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <br>
+    <h1 id="sala">Sala: </h1>
+    <br>
+
+    <table>
+      <tr>
+        <td>Temperatura (°C)</td>
+        <td class="temp" id="temperatura"></td>
+      </tr>
+      <tr>
+        <td>Umidade (%)</td>
+        <td class="umi" id="umidade"></td>
+      </tr>
+      <tr>
+        <td>Altura (cm)</td>
+        <td class="alt" id="altura"></td>
+      </tr>
+      <tr>
+        <td>Luminosidade (%)</td>
+        <td class="lumi" id="luminosidade"></td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+    <input type='image' disabled src="https://i.ibb.co/SRdJMNZ/luz-apagada.png" class="lampada" id="apagada"
+      onclick="changeLamp()" />
+  </nav>
+  <section>
+    <header>
+      <h2>Monitoramento da Iluminação</h2>
+    </header>
+    <article>
+      <main>
+        <section>
+          <map name="mapa">
+            <area href="#/" onclick="SelecionaSala(event)" id="blocob/b101" shape="rect" coords="68,656,150,710"
+              alt="Computer">
+            <area href="#/" onclick="SelecionaSala(event)" id="blocob/b102" shape="rect" coords="150,710,230,655"
+              alt="Computer">
+            <area href="#/" onclick="SelecionaSala(event)" id="blocob/b103" shape="rect" coords="229,656,311,710"
+              alt="Computer">
+          </map>
+
+          <img src="plantaDaelninkspace.jpg" usemap="#mapa" />
+        </section>
+        <section id="loginPopup">
+          <form id="loginForm" action="" onsubmit="return false">
+            <h1>Entrar no Sistema</h1>
+            <label for="user"><b>Usuário</b></label>
+            <input type="text" name="user" required>
+
+            <label for="psw"><b>Senha</b></label>
+            <input type="password" name="psw" required>
+
+            <button type="submit" name="submit" required>Login</button>
+
+            <output name="message"></output>
+          </form>
+        </section>
+      </main>
+    </article>
+    <footer>
+      <img src="https://i.ibb.co/MkH52w6/Logo-IFSC.png">
+      <p>DAELN, Departamento Acadêmico de Eletrônica - IFSC, Campus Florianópolis</p>
+    </footer>
+  </section>
+
+
+
+</body>
+
+<script src="login.js" type="text/javascript"></script>
+
+</html>
